@@ -104,10 +104,10 @@ func SignSha256WithRsaPKCS8(data string, privateKey []byte) (string, error) {
     }
     pri := p.(*rsa.PrivateKey)
 
-    sha1Hash := sha256.New()
+    sha256Hash := sha256.New()
     s_data := []byte(data)
-    sha1Hash.Write(s_data)
-    hashed := sha1Hash.Sum(nil)
+    sha256Hash.Write(s_data)
+    hashed := sha256Hash.Sum(nil)
 
     signByte, err := rsa.SignPKCS1v15(rand.Reader, pri, crypto.SHA256, hashed)
     sign := base64.StdEncoding.EncodeToString(signByte)
@@ -142,10 +142,10 @@ func SignSha256WithRsaPKCS1(data string, privateKey []byte) (string, error) {
     if err != nil {
         panic(err.Error())
     }
-    sha1Hash := sha256.New()
+    sha256Hash := sha256.New()
     s_data := []byte(data)
-    sha1Hash.Write(s_data)
-    hashed := sha1Hash.Sum(nil)
+    sha256Hash.Write(s_data)
+    hashed := sha256Hash.Sum(nil)
 
     signByte, err := rsa.SignPKCS1v15(rand.Reader, pri, crypto.SHA256, hashed)
     sign := base64.StdEncoding.EncodeToString(signByte)
