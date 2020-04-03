@@ -19,7 +19,7 @@ go get -u github.com/reaburoa/elec-signature
 ### 使用
 在使用过程中只需要引入Signature库即可轻松使用各种Hash算法生成类似签名等数据，如
 
-```
+```Go
 package main
 
 import (
