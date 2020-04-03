@@ -5,9 +5,9 @@ func FormatPrivateKey(privateKey string) string {
     length := len(tempKey)
     formatPriKey := "-----BEGIN RSA PRIVATE KEY-----\n"
     tail := make([]byte, length)
-    for i := 0; i < length; i ++ {
-        if (i + 1) % 64 == 0 {
-            head := tempKey[i-63:i+1]
+    for i := 0; i < length; i++ {
+        if (i+1)%64 == 0 {
+            head := tempKey[i-63 : i+1]
             tail = tempKey[i+1:]
             formatPriKey += string(head) + "\n"
         }
@@ -22,7 +22,7 @@ func FastFormatPrivateKey(privateKey string) []byte {
     length := len(tempKey)
     page := length / 64
     formatPriKey := "-----BEGIN RSA PRIVATE KEY-----\n"
-    for i := 0; i < page; i ++ {
+    for i := 0; i < page; i++ {
         formatPriKey += string(tempKey[i*64:(i+1)*64]) + "\n"
     }
     formatPriKey += string(tempKey[page*64:]) + "\n"
@@ -35,7 +35,7 @@ func FastFormatPublicKey(publicKey string) []byte {
     length := len(tempKey)
     page := length / 64
     formatPubKey := "-----BEGIN PUBLIC KEY-----\n"
-    for i := 0; i < page; i ++ {
+    for i := 0; i < page; i++ {
         formatPubKey += string(tempKey[i*64:(i+1)*64]) + "\n"
     }
     formatPubKey += string(tempKey[page*64:]) + "\n"
