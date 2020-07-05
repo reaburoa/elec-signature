@@ -1,4 +1,6 @@
-# Go语言实现Hash算法
+# Go语言实现加密签名算法
+
+## 签名算法
 #### 目的在于在应用中更为简便的使用各类Hash、Rsa算法，生成诸如签名类数据。
 ### 目前支持的Hash算法主要包含：
 - MD5
@@ -43,5 +45,39 @@ func main() {
     pub := signature.FastFormatPublicKey("MIIBITAN")
     verify := signature.VerifySignSha1WithRsa("QRYCNY282", pub)
     fmt.Println(verify)
+}
+```
+
+## 加密算法
+#### 目的在于在应用中更为简便的使用各类加解密算法，生成加密数据。
+### 目前支持的Hash算法主要包含：
+- AES
+
+### 使用
+在使用过程中只需要引入Encryption库即可轻松使用各种加密算法生成加密数据，如
+```Go
+package main
+
+import (
+    "fmt"
+    "github.com/reaburoa/elec-signature/encryption"
+)
+
+func main() {
+    e, er := encryption.AESEncrypt(
+        []byte("test-foo"), // 待加密数据
+        []byte("123456789012345612345678"), // 加密key
+        []byte("0102030405060708"), // 加密向量iv，必须16|24|32位
+        "cfb", // 加密模式，支持：cbc、cfb
+    )
+    fmt.Println(e, er)
+
+    d, er := encryption.AESDecrypt(
+        e, // 秘文
+        "cfb", // 解密模式
+        []byte("123456789012345612345678"), // 解密key
+        []byte("0102030405060708"), // 解密向量iv，必须16|24|32位
+    )
+    fmt.Println(string(d), er)
 }
 ```
